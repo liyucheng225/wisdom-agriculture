@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {getItemAlign} from "echarts/lib/component/visualMap/helper";
 Vue.use(Vuex);
 export default new Vuex.Store({
     state:{
         user:{},
         waterFile:{},
         weatherFile:{},
+        Temperature:{},
         index:1,
         isLogin:false,
     },
@@ -30,6 +30,11 @@ export default new Vuex.Store({
                 state.weatherFile = file
                 console.log('state.index:%d',state.index)
                 console.log(state.waterFile)
+            }
+            if(state.index ==7){
+                state.Temperature = file
+                console.log('state.index:%d',state.index)
+                console.log(state.Temperature)
             }
         },
         changeIndex(state,index){

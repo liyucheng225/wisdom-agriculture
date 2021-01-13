@@ -2,8 +2,8 @@
     <div class="page">
         <div class="login-box">
             <p data-v-032893be class="title">欢迎登录</p>
-            <el-tabs v-model="activeName">
-                <el-tab-pane label="密码登录" name="first" >
+            <el-tabs v-model="activeName" @tab-click="emptyCode();getVcode()">
+                <el-tab-pane label="密码登录" name="first"  >
                     <el-form
                             :model="ruleForm"
                             status-icon
@@ -191,7 +191,7 @@
             // <!--提交登录-->
             submitForm(formName) {
                 if ((this.ruleForm.username && this.ruleForm.phone) == "" && this.ruleForm.vcode == ""  && this.ruleForm.password == "") {
-                        this.$message({
+                        this.$message.error({
                             message: "请输入完整信息！",
                         });
                         this.getVcode();
@@ -203,20 +203,26 @@
                         this.confirmRuleForm = res.data
                         console.log(this.confirmRuleForm.msg)
                         this.$refs[formName].validate(valid => {
-                            if (valid) {
+                            if (valid&&this.confirmRuleForm.code == "200") {
                                 this.logining = true;
                                 setTimeout(() => {
-                                    this.$message({
+                                    this.$message.success({
                                         message: "登录成功！",
                                         type: "success"
                                     });
                                     this.gotoHome()
                                 }, 400);
                             } else if (this.confirmRuleForm.code == "A001") {
+                                this.$message.error("用户名不存在,登录失败!!")
                                 console.log("用户名不存在,登录失败!!");
                                 return false;
                             } else if (this.confirmRuleForm.code == "A005") {
+                                this.$message.error("用户存在,密码错误!!")
                                 console.log("用户存在,密码错误!!");
+                                return false;
+                            } else if (this.confirmRuleForm.code == "A003") {
+                                this.$message.error("验证码错误!!")
+                                console.log("验证码错误!!");
                                 return false;
                             }
                         });

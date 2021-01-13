@@ -16,23 +16,21 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-// router.beforeEach( function(to,from,next) {
-//   document.title=to.matched[0].meta.title
-//   // console.log(to)
-//   // console.log(from)
-//   // next()   //至此就可以显示页面了
-//   //做业务逻辑,如果是登录状态，就进行下一步（注意登录页面不可做这个判断）
-//   if (to.name == 'Login') {//如果要去的页面是登录页面，就进行下一步，不做判断
-//     next()
-//   }else if(to.name == 'Register') {
-//     next()
-//   } else {
-//     if (store.getters.isLogin === true) {
-//
-//       next()
-//     } else {
-//       next('/Login')
-//     }
-//   }
-// });
+
+router.beforeEach( function(to,from,next) {
+  if (to.name == 'Login') {
+    document.title=to.matched[0].meta.title
+    next()
+  }else if(to.name == 'Register') {
+    document.title=to.matched[0].meta.title
+    next()
+  } else {
+    if (store.getters.isLogin === true) {
+      document.title=to.matched[0].meta.title
+      next()
+    } else {
+      next('/Login')
+    }
+  }
+});
 

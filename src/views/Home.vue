@@ -5,10 +5,10 @@
                 <span style="font-size: 20px;color: dodgerblue"></span>
             </div>
             <a-menu router theme="dark" :default-selected-keys="[index]" mode="inline">
-                <a-menu-item key="1">
+                <a-menu-item key="1" @click="changeIndex(1)">
                     <router-link :to="{path: '/HomePage'}">
                         <a-icon type="desktop" />
-                        <span @click="changeIndex(1)">首页</span>
+                        <span >首页</span>
                     </router-link>
                 </a-menu-item>
                 <a-sub-menu key="2">
@@ -24,6 +24,19 @@
                 <a-sub-menu key="4">
                     <span slot="title"><a-icon type="line-chart" /><span @click="changeIndex(4)">生产单元二</span></span>
                     <a-menu-item key="5" @click.native="changeIndex(5)">
+                        <router-link to="/WeatherStations">
+                            <span>气象站</span>
+                        </router-link>
+                    </a-menu-item>
+                </a-sub-menu>
+                <a-sub-menu key="6">
+                    <span slot="title"><a-icon type="line-chart" /><span @click="changeIndex(6)">生产单元三</span></span>
+                    <a-menu-item key="7" @click.native="changeIndex(7)">
+                        <router-link to="/TemperatureAndHumidity">
+                            <span>实验室温湿度传感器</span>
+                        </router-link>
+                    </a-menu-item>
+                    <a-menu-item key="8" @click.native="changeIndex(8)">
                         <router-link to="/WeatherStations">
                             <span>气象站</span>
                         </router-link>
@@ -48,7 +61,7 @@
             </a-layout-header>
             <a-layout-content id="body" >
                 <div style="padding-top: 7px;float: right;">
-                    <choose-data style="padding-right: 200px" ></choose-data>
+                    <choose-data style="padding-right: 200px" v-if="isShowData"></choose-data>
                     {{time}}
                 </div>
                 <router-view ></router-view>
@@ -69,6 +82,7 @@
         name:"name",
         data() {
             return {
+                isShowData:"true",
                 file:{},
                 collapsed: false,
                 username:this.$store.state.user.msg,
@@ -84,8 +98,18 @@
         },
         methods:{
             changeIndex(index){
-                console.log('index:%d',index)
-                this.$store.commit("changeIndex",index);
+                console.log('index= %d',index)
+                console.log(this.isShowData)
+                if(index == 1 ){
+                    this.isShowData=false
+                    console.log(this.isShowData)
+                }
+                else {
+                    this.isShowData = true
+                    console.log(this.isShowData)
+                    console.log('index:%d', index)
+                    this.$store.commit("changeIndex", index);
+                }
             }
         }
     };

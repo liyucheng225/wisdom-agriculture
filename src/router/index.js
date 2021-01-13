@@ -6,6 +6,7 @@ import WeatherStations from "@/views/Weather stations/WeatherStations";
 import WaterQuality from "@/views/Water quality of the terminal/WaterQuality";
 import Register from "@/views/Login/Register";
 import HomePage from "@/views/HomePage/HomePage";
+import TemperatureAndHumidity from "@/views/temperature and humidity sensors/TemperatureAndHumidity";
 
 Vue.use(VueRouter)
 
@@ -58,6 +59,14 @@ const routes = [
         component: WaterQuality,
         meta:{
           title:"水质终端"
+        }
+      },
+      {
+        path: '/TemperatureAndHumidity',
+        name: 'TemperatureAndHumidity',
+        component: TemperatureAndHumidity,
+        meta:{
+          title:"实验室温湿度传感器"
         }
       },
     ]
