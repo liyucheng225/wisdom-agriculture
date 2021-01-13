@@ -49,7 +49,7 @@
             <a-layout-content id="body" >
                 <div style="padding-top: 7px;float: right;">
                     <choose-data style="padding-right: 200px" ></choose-data>
-                    {{time}} {{index}}
+                    {{time}}
                 </div>
                 <router-view ></router-view>
             </a-layout-content>
