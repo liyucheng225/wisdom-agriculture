@@ -192,7 +192,7 @@
         mounted() {
             console.log('mounted')
             console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
-            this.timer = setInterval(this.getJson,60000)
+            this.timer = setInterval(this.getJson,6000)
             this.getJson()
         },
         beforeDestroy() {
@@ -200,30 +200,33 @@
         },
         methods:{
             getJson(){
+                if(this.i > 1){
+                    this.$message.success("数据刷新")
+                }
                 this.i=this.i+1
                 console.log('i=%d',this.i)
-                axios.get('http://192.168.100.116:8080/weather_station/msgs?num='+"1").then((response) => {
+                axios.get('/weather_station/msgs?num='+"1").then((response) => {
                     console.log(response);//请求正确时执行代码
                     console.log(this.file.weatherStations)
                     this.getWeatherStations(response.data)
                 }).catch(function (response) {
                     console.log(response);//发生错误时报错
                 })
-                axios.get('http://192.168.100.116:8080/water_quality/msgs?num='+"1").then((response) => {
+                axios.get('/water_quality/msgs?num='+"1").then((response) => {
                     console.log(response);//请求正确时执行代码
                     this.getWaterQuality(response.data)
                     console.log(this.file.waterQuality)
                 }).catch(function (response) {
                     console.log(response);//发生错误时报错
                 })
-                axios.get('http://192.168.100.116:8080/illu/msgs?num='+"1").then((response) => {
+                axios.get('/illu/msgs?num='+"1").then((response) => {
                     console.log(response);//请求正确时执行代码
                     this.getLight(response.data)
                     console.log(this.file.Light)
                 }).catch(function (response) {
                     console.log(response);//发生错误时报错
                 })
-                axios.get('http://192.168.100.116:8080/temp_hum/msgs?num='+"1").then((response) => {
+                axios.get('/temp_hum/msgs?num='+"1").then((response) => {
                     console.log(response);//请求正确时执行代码
                     this.getTemperature(response.data)
                     console.log(this.file.Temperature)

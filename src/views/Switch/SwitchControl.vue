@@ -24,7 +24,7 @@ export default {
     },
     methods:{
         getControl(){
-          axios.get('http://192.168.100.116:8080/control_equip/equips').then((response) =>{
+          axios.get('/control_equip/equips').then((response) =>{
               console.log(response)
               this.changeSwitch=response.data
           }).catch((response)=>{

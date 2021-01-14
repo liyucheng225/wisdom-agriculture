@@ -143,7 +143,7 @@
             // };
             return {
                 confirmRuleForm:{},
-                src:"http://192.168.100.116:8080/user/verify_code",
+                src:axios.defaults.baseURL+"/user/verify_code",
                 ruleForm: {
                     username: "",
                     phone: "",
@@ -193,7 +193,7 @@
                         this.emptyCode()
                 } else {
                     console.log('发送请求')
-                    axios.post(`http://192.168.100.116:8080/user/login`, this.ruleForm).then(res => {
+                    axios.post(`/user/login`, this.ruleForm).then(res => {
                         console.log('res=>', res);
                         this.confirmRuleForm = res.data
                         console.log(this.confirmRuleForm.msg)
@@ -247,7 +247,7 @@
                 this.$store.commit("userStatus",true)
                 this.$store.commit("changeUser",this.confirmRuleForm)
                 this.$router.push({
-                    path:"/Home"
+                    path:"/HomePage"
                 });
             },
             // 验证手机号
@@ -268,7 +268,8 @@
   $bg-color: #f7f7f7;
   $btn-color: #409eff;
   .page {
-    background-color: $bg-color;
+    background: url("../../assets/cool-background.png") no-repeat center center;
+    background-size: 100% 100%;
     position: absolute;
     width: 100%;
     height: 100%;

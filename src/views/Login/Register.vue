@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page">
         <div class="register-wrapper">
             <div id="register">
                 <p class="title">注册</p>
@@ -23,7 +23,7 @@
                     </el-form-item>
                     <el-form-item prop="vcode" class="code">
                         <el-input v-model="ruleForm2.vcode" placeholder="图片验证码"></el-input>
-                        <img style="margin-left: 150px" src="http://192.168.100.116:8080/user/verify_code" onclick="this.src=this.src+'?'+Math.random()"/>
+                        <img style="margin-left: 150px" :src="src" onclick="this.src=this.src+'?'+Math.random()"/>
                     </el-form-item>
                     <el-form-item prop="pass">
                         <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="输入密码"></el-input>
@@ -92,6 +92,7 @@
                     tel: "",
                     vcode: ""
                 },
+                src:axios.defaults.baseURL+'/user/verify_code',
                 confirmRuleForm:{
                 },
                 rules2: {
@@ -122,7 +123,7 @@
                     });
                 }else {
                     console.log('发送请求')
-                    axios.post(`http://192.168.100.116:8080/user/registry`, this.ruleForm2).then(res => {
+                    axios.post(`/user/registry`, this.ruleForm2).then(res => {
                         console.log('res=>', res);
                         this.confirmRuleForm = res.data
                         console.log(this.confirmRuleForm.msg)
@@ -173,7 +174,9 @@
         z-index: 1;
     }
     .register-wrapper {
-        background-color: #f7f7f7;
+        background: url("../../assets/cool-background.png") no-repeat center center;
+        background-size: 100% 100%;
+        /*background-color: #f7f7f7;*/
         position: fixed;
         top: 0;
         right: 0;

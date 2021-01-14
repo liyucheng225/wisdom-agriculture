@@ -45,6 +45,9 @@ export default new Vuex.Store({
         },
         changeIndex(state,index){
           state.index = index
+        },
+        changeLogin(state,flag){
+            state.isLogin=flag
         }
     },
 })

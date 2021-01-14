@@ -43,7 +43,7 @@
                 console.log('JSONAAAAAAA')
                 // axios的基本用法，只发送一个请求
                 if(this.$store.state.index == 3 ){
-                    axios.get('http://192.168.100.116:8080/water_quality/day_msgs?times='+this.sendData).then((response) => {
+                    axios.get('/water_quality/day_msgs?times='+this.sendData).then((response) => {
                         console.log(response);//请求正确时执行代码
                         if(response.data.code=="B001"){
                             this.$message.error(this.sendData+"的数据为空")
@@ -59,7 +59,7 @@
                         console.log(response);//发生错误时报错
                     })
                 } else if(this.$store.state.index == 5) {
-                    axios.get('http://192.168.100.116:8080/weather_station/day_msgs?times='+this.sendData).then((response) => {
+                    axios.get('/weather_station/day_msgs?times='+this.sendData).then((response) => {
                         console.log(response);//请求正确时执行代码
                         if(response.data.code=="B001"){
                             this.$message.error(this.sendData+"的数据为空")
@@ -73,7 +73,7 @@
                         console.log(response);//发生错误时报错
                     })
                 } else if(this.$store.state.index == 7) {
-                    axios.get('http://192.168.100.116:8080/temp_hum/day_msgs?times='+this.sendData).then((response) => {
+                    axios.get('/temp_hum/day_msgs?times='+this.sendData).then((response) => {
                         console.log(response);//请求正确时执行代码
                         if(response.data.code=="B001"){
                             this.$message.error(this.sendData+"的数据为空")
@@ -87,7 +87,7 @@
                         console.log(response);//发生错误时报错
                     })
                 } else if(this.$store.state.index == 8) {
-                    axios.get('http://192.168.100.116:8080/illu/day_msgs?times='+this.sendData).then((response) => {
+                    axios.get('/illu/day_msgs?times='+this.sendData).then((response) => {
                         console.log(response);//请求正确时执行代码
                         if(response.data.code=="B001"){
                             this.$message.error(this.sendData+"的数据为空")

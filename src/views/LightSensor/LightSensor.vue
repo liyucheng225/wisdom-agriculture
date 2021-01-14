@@ -54,7 +54,7 @@
                 getJson(){
                     this.i=this.i+1
                     console.log('i=%d',this.i)
-                    axios.get('http://192.168.100.116:8080/illu/day_msgs?').then((response) => {
+                    axios.get('/illu/day_msgs?').then((response) => {
                         console.log(response);//请求正确时执行代码
                         this.file = response.data;
                         this.$store.commit("changeJson",this.file);

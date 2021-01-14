@@ -64,7 +64,7 @@
                     </router-link>
                     <span>|</span>
                     <router-link :to="{path:'/'}">
-                        <span class="exit">退出</span>
+                        <span class="exit" @click="remain">退出</span>
                     </router-link>
                 </div>
             </a-layout-header>
@@ -105,6 +105,10 @@
             },
         },
         methods:{
+            remain(){
+                this.$store.commit("changeLogin",false)
+                this.$message.success("退出成功！")
+            },
             changeIndex(index){
                 console.log('index= %d',index)
                 console.log(this.isShowData)

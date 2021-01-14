@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from "axios";
 axios.defaults.withCredentials = true
 Vue.config.productionTip = false
+axios.defaults.baseURL = 'http://47.103.223.223:8081'
 Vue.use(Antd)
 Vue.use(ElementUI)
 new Vue({

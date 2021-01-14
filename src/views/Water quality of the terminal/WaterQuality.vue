@@ -14,7 +14,7 @@
         data() {
             return {
                 i:1,
-                num:100,
+                num:10,
                 chartLine: null,
                 cTime:[],
                 salt:[],
@@ -75,7 +75,7 @@
             getJson(){
                 this.i=this.i+1
                 console.log('i=%d',this.i)
-                axios.get('http://192.168.100.116:8080/water_quality/msgs?num='+this.num).then((response) => {
+                axios.get('/water_quality/msgs?num='+this.num).then((response) => {
                     console.log(response);//请求正确时执行代码
                     this.file = response.data;
                     // console.log(this.file);
@@ -153,7 +153,7 @@
                             },
                             axisLabel: {
                                 //  如果这个字段不设置，echarts会根据屏宽及横坐标数据自动给出间隔
-                                interval: 20,
+                                interval: 2,
                                 // 间隔长度，可自定义（如果是时间格式，echarts会自动处理）
                                 rotate: 40 // 横坐标上label的倾斜度
                             },

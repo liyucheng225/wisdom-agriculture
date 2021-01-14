@@ -54,7 +54,7 @@
             sendControl(){
                 this.isSuccess=true //控制按钮是否可以点击
                 this.timer = setTimeout(this.change,60000)
-                axios.post(`http://192.168.100.116:8080/control_equip/equip`, this.control).then((response) =>{
+                axios.post(`/control_equip/equip`, this.control).then((response) =>{
                      this.isSuccess = false
                      console.log('请求成功')
                      console.log(response)//请求成功
@@ -63,7 +63,7 @@
                              message:this.control.propSwitch+(this.control.status==true?"打开":"关闭")+"成功!"
                          })
                      }else if(response.data.code == "400"){
-                         this.Switch.status=!this.Switch.status
+                         this.controlSwitch.status=!this.controlSwitch.status
                          this.$message.error({
                              message:this.control.propSwitch+(this.control.status==true?"打开":"关闭")+response.data.msg
                          })
@@ -76,14 +76,14 @@
             },
             isControl(){
                 if(this.isSuccess == false ){
-                    this.$message.error("请等待"+this.control.propSwitch+"回应!")
+                    this.$message("请等待"+this.control.propSwitch+"回应!")
                 }
             },
             change(){
                if(this.isSuccess == true) {
                    this.$message.error(this.control.propSwitch+"没有回应!")
                    this.isSuccess = false
-                   this.Switch.status=!this.Switch.status
+                   this.controlSwitch.status=!this.controlSwitch.status
                }
             }
         }
