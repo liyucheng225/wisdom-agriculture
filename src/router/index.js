@@ -8,6 +8,7 @@ import Register from "@/views/Login/Register";
 import HomePage from "@/views/HomePage/HomePage";
 import TemperatureAndHumidity from "@/views/temperature and humidity sensors/TemperatureAndHumidity";
 import SwitchControl from "@/views/Switch/SwitchControl";
+import LightSensor from "@/views/LightSensor/LightSensor";
 Vue.use(VueRouter)
 
 const routes = [
@@ -75,6 +76,14 @@ const routes = [
         component: SwitchControl,
         meta:{
           title:"开关控制"
+        }
+      },
+      {
+        path: '/LightSensor',
+        name: 'LightSensor',
+        component: LightSensor,
+        meta:{
+          title:"光照传感器"
         }
       },
     ]

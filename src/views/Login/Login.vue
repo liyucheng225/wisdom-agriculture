@@ -184,11 +184,6 @@
                 console.log("刷新")
                 this.src=this.src+'?'+Math.random()
             },
-            //密码判断渲染，true:暗文显示，false:明文显示
-            // changePass(value) {
-            //     this.visible = !(value === "show");
-            // },
-            // <!--提交登录-->
             submitForm(formName) {
                 if ((this.ruleForm.username && this.ruleForm.phone) == "" && this.ruleForm.vcode == ""  && this.ruleForm.password == "") {
                         this.$message.error({

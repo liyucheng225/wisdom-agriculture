@@ -10,6 +10,7 @@
         name:"TemperatureAndHumidity",
         data() {
             return {
+                i:1,
                 chartLine: null,
                 th_ctime:[],
                 cTime:[],
@@ -23,6 +24,7 @@
             this.file = this.$store.state.Temperature
             console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
             console.log(this.file)
+            this.timer = setInterval(this.getJson,60000)
             if(JSON.stringify(this.$store.state.Temperature)!='{}'){
                 this.splintData()
                 this.$nextTick(() => {
@@ -32,6 +34,9 @@
             else{
                this.getJson()
             }
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
         },
         watch: {
             '$store.state.Temperature':function(val,oldVal) {
@@ -47,7 +52,9 @@
         },
         methods: {
             getJson(){
-                axios.get('http://192.168.100.116:8080/temp_hum/msgs?').then((response) => {
+                this.i=this.i+1
+                console.log('i=%d',this.i)
+                axios.get('http://192.168.100.116:8080/temp_hum/day_msgs?').then((response) => {
                     console.log("aaaaa")
                     console.log(response);//请求正确时执行代码
                     this.file = response.data;
@@ -89,7 +96,11 @@
                 this.chartLine = echarts.init(this.$el,'shine');// 基于准备好的dom，初始化echarts实例
                 let option = {
                     tooltip : {
-                        trigger: 'axis'
+                        trigger: 'axis',
+                        backgroundColor:'rgba(255,255,255,0.7)',
+                        textStyle:{
+                            color:'red'
+                        },
                     },
                     legend: {
                         data:['温度','湿度']
@@ -104,13 +115,11 @@
                             },
                             axisLabel: {
                                 //  如果这个字段不设置，echarts会根据屏宽及横坐标数据自动给出间隔
-                                interval: 20,
+                                // interval: 20,//数据较少，不设置周期
                                 // 间隔长度，可自定义（如果是时间格式，echarts会自动处理）
                                 rotate: 40 // 横坐标上label的倾斜度
                             },
                             data :this.cTime
-                            // data:[1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,]
-                            // data:["1:22","2:22","3:22","1:22","1:22","1:22","1:22","5:22","1:22","1:22","7:22","6:22","1:22","2:22","3:22","1:22","1:22","1:22","1:22","5:22","1:22","1:22","7:22","6:22","1:22","5:22","1:22","1:22","7:22","6:22"]
                         }
                     ],
                     yAxis : [
@@ -153,7 +162,7 @@
 <style lang='less' scope>
   .line-wrap{
     padding-top: 100px;
-    width:100%;
-    height:100%;
+    width:1300px;
+    height:620px;
   }
 </style>

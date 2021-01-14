@@ -1,12 +1,13 @@
 <template>
     <div class="wrapper">
-        <switch-button  v-for="item in changeSwitch" :prop-switch="item" style="width: 50%; margin: 60px 0 60px 0"></switch-button>
+        <switch-button  v-for="item in changeSwitch" :control-switch="item" style="width: 50%; margin: 60px 0 60px 0"></switch-button>
     </div>
 </template>
 
 
 <script>
     import SwitchButton from "@/components/button/SwitchButton";
+    import axios from "axios";
 export default {
     name: "SwitchControl",
     components:{
@@ -14,9 +15,22 @@ export default {
     },
     data() {
       return {
-          // chooseSwitch:"1号终端",
-          changeSwitch:["1号终端","2号终端","3号终端","4号终端","5号终端","6号终端","7号终端","8号终端"],
+          changeSwitch:[],
       }
+    },
+    mounted() {
+      this.getControl()
+    },
+    methods:{
+        getControl(){
+          axios.get('http://192.168.100.116:8080/control_equip/equips').then((response) =>{
+              console.log(response)
+              this.changeSwitch=response.data
+          }).catch((response)=>{
+              console.log(response)
+              this.$message.error("服务器繁忙!!")
+          })
+        },
     }
 }
 </script>

@@ -63,14 +63,6 @@
                     callback()
                 }
             }
-            //  <!--验证码是否为空-->
-            let checkSmscode = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入手机验证码'))
-                } else {
-                    callback()
-                }
-            }
             // <!--验证密码-->
             let validatePass = (rule, value, callback) => {
                 if (value === "") {
@@ -98,7 +90,6 @@
                     password: "",
                     checkPass: "",
                     tel: "",
-                    smscode: "",
                     vcode: ""
                 },
                 confirmRuleForm:{
@@ -111,7 +102,6 @@
                     password: [{ validator: validatePass, trigger: 'change' }],
                     checkPass: [{ validator: validatePass2, trigger: 'change' }],
                     tel: [{ validator: checkTel, trigger: 'change' }],
-                    smscode: [{ validator: checkSmscode, trigger: 'change' }],
                 },
                 buttonText: '发送验证码',
                 isDisabled: false, // 是否禁止点击发送验证码按钮
@@ -172,7 +162,7 @@
                 } else {
                     return false;
                 }
-            }
+            },
         }
     };
 </script>

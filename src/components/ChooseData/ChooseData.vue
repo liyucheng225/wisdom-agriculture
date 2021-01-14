@@ -1,8 +1,6 @@
 <template>
     <div class="data">
-        <span style="font-size:17px;color: black;padding-right: 10px">时间:</span>
         <a-date-picker :size="size" v-model="time"/>
-        {{time}}
     </div>
 </template>
 <script>
@@ -28,7 +26,7 @@
                     if(this.confirmData(this.time) == false){
                         this.getJson()
                     }else {
-                        this.$message({
+                        this.$message.error({
                             message: "时间不能大于当前实际时间！",
                         });
                     }
@@ -55,15 +53,36 @@
                     }).catch(function (response) {
                         console.log(response);//发生错误时报错
                     })
-                }
-                else if(this.$store.state.index == 5) {
+                } else if(this.$store.state.index == 5) {
                     axios.get('http://192.168.100.116:8080/weather_station/day_msgs?times='+this.sendData).then((response) => {
                         console.log(response);//请求正确时执行代码
                         this.file = response.data;
-                        // console.log(this.file);
                         this.$store.commit("changeJson",this.file);
                         console.log('输出state.file5')
                         console.log(this.$store.state.weatherFile)
+                    }).catch(function (response) {
+                        console.log(response);//发生错误时报错
+                    })
+                } else if(this.$store.state.index == 7) {
+                    axios.get('http://192.168.100.116:8080/temp_hum/day_msgs?times='+this.sendData).then((response) => {
+                        console.log(response);//请求正确时执行代码
+                        this.file = response.data;
+                        this.$store.commit("changeJson",this.file);
+                        console.log('输出state.file7')
+                        console.log(this.$store.state.Temperature)
+                    }).catch(function (response) {
+                        console.log(response);//发生错误时报错
+                    })
+                } else if(this.$store.state.index == 8) {
+                    axios.get('http://192.168.100.116:8080/illu/day_msgs?times='+this.sendData).then((response) => {
+                        console.log(response);//请求正确时执行代码
+                        if(response.code=="B001"){
+                            this.$message.error(this.sendData+"的数据为空")
+                        }else{}
+                        this.file = response.data;
+                        this.$store.commit("changeJson",this.file);
+                        console.log('输出state.file8')
+                        console.log(this.$store.state.LightSensor)
                     }).catch(function (response) {
                         console.log(response);//发生错误时报错
                     })

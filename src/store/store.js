@@ -7,6 +7,7 @@ export default new Vuex.Store({
         waterFile:{},
         weatherFile:{},
         Temperature:{},
+        LightSensor:{},
         index:1,
         isLogin:false,
     },
@@ -35,6 +36,11 @@ export default new Vuex.Store({
                 state.Temperature = file
                 console.log('state.index:%d',state.index)
                 console.log(state.Temperature)
+            }
+            if(state.index ==8){
+                state.LightSensor= file
+                console.log('state.index:%d',state.index)
+                console.log(state.LightSensor)
             }
         },
         changeIndex(state,index){

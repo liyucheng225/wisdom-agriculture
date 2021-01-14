@@ -13,6 +13,7 @@
         },
         data() {
             return {
+                i:1,
                 chartLine: null,
                 cTime:[],
                 temp:[],
@@ -30,6 +31,7 @@
             this.file = this.$store.state.weatherFile
             console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
             console.log(this.file)
+            this.timer = setInterval(this.getJson,60000)
             if(JSON.stringify(this.$store.state.weatherFile)!='{}'){
                 this.splintData()
                 this.$nextTick(() => {
@@ -39,6 +41,9 @@
             else{
                this.getJson()
             }
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
         },
         watch: {
             '$store.state.weatherFile':function(val,oldVal) {
@@ -65,6 +70,8 @@
         },
         methods: {
             getJson(){
+                this.i=this.i+1
+                console.log('i=%d',this.i)
                 axios.get('http://192.168.100.116:8080/weather_station/day_msgs').then((response) => {
                     console.log(response);//请求正确时执行代码
                     this.file = response.data;
@@ -114,7 +121,11 @@
                 this.chartLine = echarts.init(this.$el,'shine');// 基于准备好的dom，初始化echarts实例
                 let option = {
                     tooltip : {
-                        trigger: 'axis'
+                        backgroundColor:'rgba(255,255,255,0.7)',
+                        textStyle:{
+                            color:'red'
+                        },
+                        trigger: 'axis',
                     },
                     legend: {
                         data:['温度','湿度','光照','温度','风向','风速','24小时降雨量']
@@ -134,8 +145,6 @@
                                 rotate: 40 // 横坐标上label的倾斜度
                             },
                             data :this.cTime
-                            // data:[1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,]
-                            // data:["1:22","2:22","3:22","1:22","1:22","1:22","1:22","5:22","1:22","1:22","7:22","6:22","1:22","2:22","3:22","1:22","1:22","1:22","1:22","5:22","1:22","1:22","7:22","6:22","1:22","5:22","1:22","1:22","7:22","6:22"]
                         }
                     ],
                     yAxis : [
@@ -210,7 +219,7 @@
 <style lang='less' scope>
   .line-wrap{
     padding-top: 100px;
-    width:100%;
-    height:100%;
+    width:1300px;
+    height:620px;
   }
 </style>

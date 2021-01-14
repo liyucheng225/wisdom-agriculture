@@ -2,7 +2,7 @@
     <a-layout id="components-layout-demo-side" style="min-height: 100vh" >
         <a-layout-sider v-model="collapsed" collapsible >
             <div class="logo" >
-                <span style="font-size: 20px;color: dodgerblue"></span>
+                <span style="font-size: 20px;color: dodgerblue" v-if="!collapsed">南京智慧农业</span>
             </div>
             <a-menu router theme="dark" :default-selected-keys="[index]" mode="inline">
                 <a-menu-item key="1" @click="changeIndex(1)">
@@ -12,41 +12,41 @@
                     </router-link>
                 </a-menu-item>
                 <a-sub-menu key="2">
-                    <span slot="title"><a-icon type="line-chart" />
+                    <span slot="title"><a-icon type="menu-unfold" />
                         <span @click="changeIndex(2)">生产单元一</span>
                     </span>
                     <a-menu-item key="3" @click.native="changeIndex(3)">
                         <router-link to="/WaterQuality" >
-                            <span >水质终端</span>
+                            <a-icon type="line-chart" /><span >水质终端</span>
                         </router-link>
                     </a-menu-item>
                 </a-sub-menu>
                 <a-sub-menu key="4">
-                    <span slot="title"><a-icon type="line-chart" /><span @click="changeIndex(4)">生产单元二</span></span>
+                    <span slot="title"><a-icon type="menu-unfold" /><span @click="changeIndex(4)">生产单元二</span></span>
                     <a-menu-item key="5" @click.native="changeIndex(5)">
                         <router-link to="/WeatherStations">
-                            <span>气象站</span>
+                            <a-icon type="line-chart" /><span>气象站</span>
                         </router-link>
                     </a-menu-item>
                 </a-sub-menu>
                 <a-sub-menu key="6">
-                    <span slot="title"><a-icon type="line-chart" /><span @click="changeIndex(6)">生产单元三</span></span>
+                    <span slot="title"><a-icon type="menu-unfold" /><span @click="changeIndex(6)">生产单元三</span></span>
                     <a-menu-item key="7" @click.native="changeIndex(7)">
                         <router-link to="/TemperatureAndHumidity">
-                            <span>实验室温湿度传感器</span>
+                            <a-icon type="line-chart" /><span>温湿度传感器</span>
                         </router-link>
                     </a-menu-item>
                     <a-menu-item key="8" @click.native="changeIndex(8)">
-                        <router-link to="/WeatherStations">
-                            <span>气象站</span>
+                        <router-link to="/LightSensor">
+                            <a-icon type="line-chart" /><span>光照传感器</span>
                         </router-link>
                     </a-menu-item>
                 </a-sub-menu>
                 <a-sub-menu key="9">
-                    <span slot="title"><a-icon type="line-chart" /><span @click="changeIndex(9)">终端控制</span></span>
+                    <span slot="title"><a-icon type="menu-unfold" /><span @click="changeIndex(9)">终端控制</span></span>
                     <a-menu-item key="10" @click.native="changeIndex(10)">
                         <router-link to="/SwitchControl">
-                            <span>开关控制</span>
+                            <a-icon type="switcher" /><span>开关控制</span>
                         </router-link>
                     </a-menu-item>
                 </a-sub-menu>
@@ -75,7 +75,6 @@
                 <router-view ></router-view>
             </a-layout-content>
             <a-layout-footer style="text-align: center">
-                Ant Design ©2020 Created by
             </a-layout-footer>
         </a-layout>
     </a-layout>

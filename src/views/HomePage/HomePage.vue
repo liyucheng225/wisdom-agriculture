@@ -2,10 +2,15 @@
     <div class="dataPage">
       <div class="first">
           <div style="text-align: center">
-          <span style="font-size: 30px;">{{title[0]}}</span>
+              <span style="font-size: 25px;">{{title[0]}}</span>
           </div>
-          <ul style="padding: 50px 0 0 120px;font-size: 20px ">
-              <li style="list-style: none; margin-bottom: 10px" v-for="item in file.waterQuality">{{item.title}}:{{item.data}}</li>
+          <ul style="padding: 10px 0 0 50px;font-size: 20px ">
+              <li style="font-size: 20px;list-style: none;">{{lowTitle[0]}}:</li>
+              <br>
+              <li style="list-style: none; margin-bottom: 10px;" v-for="item in file.waterQuality">
+                  {{item.title}}
+                  <span class="data">{{item.data}}{{item.unit}}</span>
+              </li>
           </ul>
       </div>
 
@@ -13,8 +18,13 @@
           <div style="text-align: center">
               <span style="font-size: 30px;">{{title[1]}}</span>
           </div>
-          <ul style="padding: 50px 0 0 120px;font-size: 20px ">
-              <li style="list-style: none; margin-bottom: 20px" v-for="item in file.weatherStations">{{item.title}}:{{item.data}}</li>
+          <ul style="padding: 10px 0 0 50px;font-size: 20px">
+              <li style="font-size: 20px;list-style: none;">{{lowTitle[1]}}:</li>
+              <br>
+              <li style="list-style: none; margin-bottom: 20px;" v-for="item in file.weatherStations">
+                  {{item.title}}
+                  <span class="data">{{item.data}}{{item.unit}}</span>
+              </li>
           </ul>
       </div>
 
@@ -23,117 +33,175 @@
                <span style="font-size: 30px;">{{title[2]}}</span>
            </div>
            <div class="wrapper">
-               <ul style="padding: 50px 0 0 60px;font-size: 20px ">
-                   <li style="list-style: none; margin-bottom: 20px" v-for="item in file.weatherStations">{{item.title}}:{{item.data}}</li>
+               <ul style="padding: 10px 0 0 50px;font-size: 20px ">
+                   <li style="font-size: 20px;list-style: none;">{{lowTitle[2]}}:</li>
+                   <br>
+                   <li style="list-style: none; margin-bottom: 20px;" v-for="item in file.Temperature">{{item.title}}
+                       <span class="data">{{item.data}}{{item.unit}}</span>
+                   </li>
                </ul>
-               <ul style="padding: 50px 0 0 60px;font-size: 20px ">
-                   <li style="list-style: none; margin-bottom: 20px" v-for="item in file.weatherStations">{{item.title}}:{{item.data}}</li>
+               <ul style="padding: 10px 0 0 50px;font-size: 20px ">
+                   <li style="font-size: 20px;list-style: none;">{{lowTitle[3]}}:</li>
+                   <br>
+                   <li style="list-style: none; margin-bottom: 20px;" v-for="item in file.Light">{{item.title}}
+                       <span class="data">{{item.data}}{{item.unit}}</span>
+                   </li>
                </ul>
            </div>
        </div>
     </div>
 </template>
 <script>
-    // import buttonSwitch from "@/components/button/button";
     import axios from "axios";
     export default {
         name:"HomePage",
-        components: {
-            // buttonSwitch,
-        },
         data() {
             return {
+                i:1,
                 title:["生产单元一","生产单元二","生产单元三"],
                 lowTitle:[
-                    "水质终端","气象站"
+                    "水质终端","气象站","温湿度传感器","光照传感器",
                 ],
                 file:{
                     waterQuality:[
                         {
                             title:"时间",
-                            data:""
+                            data:"",
+                            unit:""
                         },
                         {
                             title:"电池电压",
-                            data:""
+                            data:"",
+                            unit:"V"
                         },
                         {
                             title:"DO",
-                            data:""
+                            data:"",
+                            unit:"1μmol/L"
                         },
                         {
                             title:"orp",
-                            data:""
+                            data:"",
+                            unit:"mv"
                         },
                         {
                             title:"PH",
-                            data:""
+                            data:"",
+                            unit:""
                         },
                         {
                             title:"电导率",
-                            data:""
+                            data:"",
+                            unit:"S/m"
                         },
                         {
                             title:"固体溶解物",
-                            data:""
+                            data:"",
+                            unit:"g"
                         },
                         {
                             title:"盐度",
-                            data:""
+                            data:"",
+                            unit:"%"
                         },
                         {
                             title:"溶解氧电压",
-                            data:""
+                            data:"",
+                            unit:"v"
                         },
                         {
                             title:"溶解氧饱和度",
-                            data:""
+                            data:"",
+                            unit:"%"
                         },
                         {
                             title:"温度",
-                            data:""
+                            data:"",
+                            unit:"°C"
                         },
                     ],//水质终端
                     weatherStations:[
                         {
                             title:'时间',
-                            data:""
+                            data:"",
+                            unit:""
                         },
                         {
                             title:'湿度',
-                            data:""
+                            data:"",
+                            unit:"%rh"
                         },
                         {
                             title:'光照',
-                            data:""
+                            data:"",
+                            unit:"lx"
                         },
                         {
                             title:'24小时降雨量',
-                            data:""
+                            data:"",
+                            unit:"mm"
                         },
                         {
                             title:'温度',
-                            data:""
+                            data:"",
+                            unit:"°C"
                         },
                         {
                             title:'风速',
-                            data:""
+                            data:"",
+                            unit:"m/s "
                         },
                         {
                             title:'风向',
-                            data:""
+                            data:"",
+                            unit:""
                         },
-                    ]//气象站
+                    ],//气象站
+                    Temperature:[
+                        {
+                            title:'时间',
+                            data:"",
+                            unit:""
+                        },
+                        {
+                            title:'温度',
+                            data:"",
+                            unit:"°C"
+                        },
+                        {
+                            title:'湿度',
+                            data:"",
+                            unit:"%rh"
+                        },
+                    ],//实验室温湿度传感器
+                    Light:[
+                        {
+                            title:'时间',
+                            data:"",
+                            unit:""
+                        },
+                        {
+                            title:'光照',
+                            data:"",
+                            unit:"lx"
+                        },
+                    ],//光照传感器
                 }
             };
         },
         mounted() {
             console.log('mounted')
             console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
+            this.timer = setInterval(this.getJson,60000)
             this.getJson()
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
         },
         methods:{
             getJson(){
+                this.i=this.i+1
+                console.log('i=%d',this.i)
                 axios.get('http://192.168.100.116:8080/weather_station/msgs?num='+"1").then((response) => {
                     console.log(response);//请求正确时执行代码
                     console.log(this.file.weatherStations)
@@ -145,6 +213,20 @@
                     console.log(response);//请求正确时执行代码
                     this.getWaterQuality(response.data)
                     console.log(this.file.waterQuality)
+                }).catch(function (response) {
+                    console.log(response);//发生错误时报错
+                })
+                axios.get('http://192.168.100.116:8080/illu/msgs?num='+"1").then((response) => {
+                    console.log(response);//请求正确时执行代码
+                    this.getLight(response.data)
+                    console.log(this.file.Light)
+                }).catch(function (response) {
+                    console.log(response);//发生错误时报错
+                })
+                axios.get('http://192.168.100.116:8080/temp_hum/msgs?num='+"1").then((response) => {
+                    console.log(response);//请求正确时执行代码
+                    this.getTemperature(response.data)
+                    console.log(this.file.Temperature)
                 }).catch(function (response) {
                     console.log(response);//发生错误时报错
                 })
@@ -170,6 +252,15 @@
                 this.file.weatherStations[3].data = response.data[0]. rain_24hr;
                 this.file.weatherStations[5].data = response.data[0].wind_Drct;
                 this.file.weatherStations[6].data = response.data[0].wind_spd;
+            },
+            getLight(response){
+                this.file.Light[0].data = response.data[0].minutesandseconds
+                this.file.Light[1].data = response.data[0].illu
+            },
+            getTemperature(response){
+                this.file.Temperature[0].data=response.data[0].minutesandseconds
+                this.file.Temperature[1].data=response.data[0].th_temp
+                this.file.Temperature[2].data=response.data[0].th_hum
             }
         }
     };
@@ -179,29 +270,32 @@
     .dataPage{
         display: flex;
         justify-content: space-around;
-        background-color: #ffffff;
         margin-top: 50px;
-        height: 580px;
-        width: 100%;
+        height: 0px;
+        width: 95%;
+        padding-left: 50px;
+        margin-bottom: 50px;
     }
     .dataPage .first{
-        width: 30%;
+        background-color: #fff;
+        border: black 1px solid;
+        width: 34%;
         height: 600px;
-        background-color: #409EFF;
-        /*text-align: center*/
+        margin-right: 30px;
     }
     .dataPage .second{
-        width: 30%;
+        border: black 1px solid;
+        width: 33%;
         height: 600px;
-        background-color: #999999;
+        margin-right: 30px;
     }
     .dataPage .third{
-        width: 40%;
+        border: black 1px solid;
+        width: 33%;
         height: 600px;
-        background-color: green;
     }
-    .dataPage .third .wrapper{
-        display: flex;
-        justify-content: space-around;
+    .data{
+        float: right;
+        margin-right: 50px;
     }
 </style>
