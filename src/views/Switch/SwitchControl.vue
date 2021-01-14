@@ -1,6 +1,7 @@
 <template>
+<!--    style="width: 50%; margin: 60px 0 60px 0"-->
     <div class="wrapper">
-        <switch-button  v-for="item in changeSwitch" :control-switch="item" style="width: 50%; margin: 60px 0 60px 0"></switch-button>
+        <switch-button v-for="item in changeSwitch" :control-switch="item" ></switch-button>
     </div>
 </template>
 
@@ -37,12 +38,11 @@ export default {
 
 <style scoped>
     .wrapper{
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        padding-left: 200px;
+        margin-top: 30px;
     }
     .wrapper switch-button{
         box-sizing: border-box;
+        border: black 2px solid;
     }
+
 </style>

@@ -14,6 +14,7 @@
         data() {
             return {
                 i:1,
+                num:100,
                 chartLine: null,
                 cTime:[],
                 salt:[],
@@ -51,6 +52,7 @@
             clearInterval(this.timer);
         },
         watch: {
+            deep:true,
             '$store.state.waterFile':function(val,oldVal) {
                 console.log('vuex变化')
                 this.file =val
@@ -60,13 +62,20 @@
                     this.drawLineChart();
                 })
             },
-            deep:true
+            cTime:function (val,oldVal) {
+                let index
+                for(let i=0;i<val.length;i++){
+                    if(val[i]!=""&&val[i]!=undefined){
+                        index=i
+                    }
+                }
+            },
         },
         methods: {
             getJson(){
                 this.i=this.i+1
                 console.log('i=%d',this.i)
-                axios.get('http://192.168.100.116:8080/water_quality/day_msgs').then((response) => {
+                axios.get('http://192.168.100.116:8080/water_quality/msgs?num='+this.num).then((response) => {
                     console.log(response);//请求正确时执行代码
                     this.file = response.data;
                     // console.log(this.file);
@@ -83,8 +92,10 @@
             },
             splintData(){
                 console.log('正在拆分数据')
-                for (let i=0;i<this.file.data.length;i++){
+                let dataLength=this.file.data.length
+                for (let i=0;i<dataLength;i++){
                     console.log('chai')
+                    console.log(i)
                     this.newTime[i]=this.file.data[i].wq_ctime
                     this.cTime[i]=this.file.data[i].minutesandseconds
                     this.batVolt[i]=this.file.data[i].bat_volt

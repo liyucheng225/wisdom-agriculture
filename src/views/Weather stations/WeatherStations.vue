@@ -13,6 +13,7 @@
         },
         data() {
             return {
+                num:100,
                 i:1,
                 chartLine: null,
                 cTime:[],
@@ -72,7 +73,7 @@
             getJson(){
                 this.i=this.i+1
                 console.log('i=%d',this.i)
-                axios.get('http://192.168.100.116:8080/weather_station/day_msgs').then((response) => {
+                axios.get('http://192.168.100.116:8080/weather_station/msgs?num='+this.num).then((response) => {
                     console.log(response);//请求正确时执行代码
                     this.file = response.data;
                     // console.log(this.file);

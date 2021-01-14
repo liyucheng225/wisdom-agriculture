@@ -10,6 +10,7 @@
         name:"ChooseData",
         data() {
             return {
+                reverse: true,
                 size: 'default',
                 time: "",
                 sendData:"",
@@ -44,58 +45,63 @@
                 if(this.$store.state.index == 3 ){
                     axios.get('http://192.168.100.116:8080/water_quality/day_msgs?times='+this.sendData).then((response) => {
                         console.log(response);//请求正确时执行代码
-                        this.file = response.data;
-                        // console.log(this.file);
-                        this.$store.commit("changeJson",this.file);
-                        console.log('输出state.file3')
-                        console.log(this.file)
-                        console.log(this.$store.state.waterFile)
+                        if(response.data.code=="B001"){
+                            this.$message.error(this.sendData+"的数据为空")
+                        }else {
+                            this.file = response.data;
+                            // console.log(this.file);
+                            this.$store.commit("changeJson", this.file);
+                            console.log('输出state.file3')
+                            console.log(this.file)
+                            console.log(this.$store.state.waterFile)
+                        }
                     }).catch(function (response) {
                         console.log(response);//发生错误时报错
                     })
                 } else if(this.$store.state.index == 5) {
                     axios.get('http://192.168.100.116:8080/weather_station/day_msgs?times='+this.sendData).then((response) => {
                         console.log(response);//请求正确时执行代码
-                        this.file = response.data;
-                        this.$store.commit("changeJson",this.file);
-                        console.log('输出state.file5')
-                        console.log(this.$store.state.weatherFile)
+                        if(response.data.code=="B001"){
+                            this.$message.error(this.sendData+"的数据为空")
+                        }else {
+                            this.file = response.data;
+                            this.$store.commit("changeJson", this.file);
+                            console.log('输出state.file5')
+                            console.log(this.$store.state.weatherFile)
+                        }
                     }).catch(function (response) {
                         console.log(response);//发生错误时报错
                     })
                 } else if(this.$store.state.index == 7) {
                     axios.get('http://192.168.100.116:8080/temp_hum/day_msgs?times='+this.sendData).then((response) => {
                         console.log(response);//请求正确时执行代码
-                        this.file = response.data;
-                        this.$store.commit("changeJson",this.file);
-                        console.log('输出state.file7')
-                        console.log(this.$store.state.Temperature)
+                        if(response.data.code=="B001"){
+                            this.$message.error(this.sendData+"的数据为空")
+                        }else {
+                            this.file = response.data;
+                            this.$store.commit("changeJson", this.file);
+                            console.log('输出state.file7')
+                            console.log(this.$store.state.Temperature)
+                        }
                     }).catch(function (response) {
                         console.log(response);//发生错误时报错
                     })
                 } else if(this.$store.state.index == 8) {
                     axios.get('http://192.168.100.116:8080/illu/day_msgs?times='+this.sendData).then((response) => {
                         console.log(response);//请求正确时执行代码
-                        if(response.code=="B001"){
+                        if(response.data.code=="B001"){
                             this.$message.error(this.sendData+"的数据为空")
-                        }else{}
-                        this.file = response.data;
-                        this.$store.commit("changeJson",this.file);
-                        console.log('输出state.file8')
-                        console.log(this.$store.state.LightSensor)
+                        }else {
+                            this.file = response.data;
+                            this.$store.commit("changeJson", this.file);
+                            console.log('输出state.file8')
+                            console.log(this.$store.state.LightSensor)
+                        }
                     }).catch(function (response) {
                         console.log(response);//发生错误时报错
                     })
                 }
             },
-            // getJson(){
-            //     axios.get(`http://192.168.100.116:8080/test/testRequest`, this.time).then(res => {
-            //         console.log('res=>', res);
-            //         this.show = res.data
-            //         console.log(this.show)
-            //         this.time.data=""
-            //     })
-            // }
         },
     };
 </script>

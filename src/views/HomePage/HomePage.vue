@@ -2,7 +2,7 @@
     <div class="dataPage">
       <div class="first">
           <div style="text-align: center">
-              <span style="font-size: 25px;">{{title[0]}}</span>
+              <span class="title">{{title[0]}}</span>
           </div>
           <ul style="padding: 10px 0 0 50px;font-size: 20px ">
               <li style="font-size: 20px;list-style: none;">{{lowTitle[0]}}:</li>
@@ -16,7 +16,7 @@
 
       <div class="second">
           <div style="text-align: center">
-              <span style="font-size: 30px;">{{title[1]}}</span>
+              <span class="title">{{title[1]}}</span>
           </div>
           <ul style="padding: 10px 0 0 50px;font-size: 20px">
               <li style="font-size: 20px;list-style: none;">{{lowTitle[1]}}:</li>
@@ -30,7 +30,7 @@
 
        <div class="third">
            <div style="text-align: center">
-               <span style="font-size: 30px;">{{title[2]}}</span>
+               <span class="title">{{title[2]}}</span>
            </div>
            <div class="wrapper">
                <ul style="padding: 10px 0 0 50px;font-size: 20px ">
@@ -267,6 +267,9 @@
 </script>
 
 <style>
+    .dataPage .title{
+        font-size: 30px;
+    }
     .dataPage{
         display: flex;
         justify-content: space-around;
@@ -284,12 +287,14 @@
         margin-right: 30px;
     }
     .dataPage .second{
+        background-color: #fff;
         border: black 1px solid;
         width: 33%;
         height: 600px;
         margin-right: 30px;
     }
     .dataPage .third{
+        background-color: #fff;
         border: black 1px solid;
         width: 33%;
         height: 600px;
@@ -297,5 +302,6 @@
     .data{
         float: right;
         margin-right: 50px;
+        color: darkblue;
     }
 </style>

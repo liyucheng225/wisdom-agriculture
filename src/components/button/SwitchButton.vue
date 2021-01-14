@@ -1,14 +1,17 @@
 <template>
-    <div >
-        <span style="font-size: 17px; vertical-align: middle;margin-right: 10px">{{ controlSwitch.propSwitch}}:</span>
+    <div class="equipSwitch">
+        <p id="list">
+        <span style="font-size: 17px; vertical-align: middle;margin-right: 10px;margin-left: 20px">{{ controlSwitch.propSwitch}}:</span>
         <el-switch
                 v-model=" controlSwitch.status"
                 inactive-text="关"
                 active-text="开"
                 :disabled="isSuccess"
-                :change="isControl"
+                @change="isControl"
+                class="switch"
         >
         </el-switch>
+        </p>
     </div>
 </template>
 
@@ -77,12 +80,30 @@
                 }
             },
             change(){
-                this.$message.error(this.control.propSwitch+"没有回应!")
-                this.isSuccess = false
+               if(this.isSuccess == true) {
+                   this.$message.error(this.control.propSwitch+"没有回应!")
+                   this.isSuccess = false
+                   this.Switch.status=!this.Switch.status
+               }
             }
         }
     };
 </script>
 
 <style>
+    .equipSwitch{
+        height: 85px;
+    }
+    .switch{
+        float: right;
+        padding-right: 50px;
+    }
+    #list{
+        height: 60px;
+        width: 97%;
+        background: white;
+        vertical-align: middle;
+        padding-top: 18px;
+        margin-left: 20px;
+    }
 </style>

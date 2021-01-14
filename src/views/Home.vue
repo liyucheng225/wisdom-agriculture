@@ -2,9 +2,10 @@
     <a-layout id="components-layout-demo-side" style="min-height: 100vh" >
         <a-layout-sider v-model="collapsed" collapsible >
             <div class="logo" >
-                <span style="font-size: 20px;color: dodgerblue" v-if="!collapsed">南京智慧农业</span>
+                <span style="font-size: 20px;margin-left:10px;color: dodgerblue" v-if="!collapsed">南京智慧农业</span>
+                <span style="font-size: 20px;margin-left:5px;color: dodgerblue" v-if="collapsed">logo</span>
             </div>
-            <a-menu router theme="dark" :default-selected-keys="[index]" mode="inline">
+            <a-menu router theme="dark" :default-selected-keys="[this.$store.state.index]" mode="inline">
                 <a-menu-item key="1" @click="changeIndex(1)">
                     <router-link :to="{path: '/HomePage'}">
                         <a-icon type="desktop" />
