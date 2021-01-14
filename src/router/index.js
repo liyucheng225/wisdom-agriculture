@@ -7,7 +7,7 @@ import WaterQuality from "@/views/Water quality of the terminal/WaterQuality";
 import Register from "@/views/Login/Register";
 import HomePage from "@/views/HomePage/HomePage";
 import TemperatureAndHumidity from "@/views/temperature and humidity sensors/TemperatureAndHumidity";
-
+import SwitchControl from "@/views/Switch/SwitchControl";
 Vue.use(VueRouter)
 
 const routes = [
@@ -67,6 +67,14 @@ const routes = [
         component: TemperatureAndHumidity,
         meta:{
           title:"实验室温湿度传感器"
+        }
+      },
+      {
+        path: '/SwitchControl',
+        name: 'SwitchControl',
+        component: SwitchControl,
+        meta:{
+          title:"开关控制"
         }
       },
     ]

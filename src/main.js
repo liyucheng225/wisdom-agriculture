@@ -17,20 +17,20 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-router.beforeEach( function(to,from,next) {
-  if (to.name == 'Login') {
-    document.title=to.matched[0].meta.title
-    next()
-  }else if(to.name == 'Register') {
-    document.title=to.matched[0].meta.title
-    next()
-  } else {
-    if (store.getters.isLogin === true) {
-      document.title=to.matched[0].meta.title
-      next()
-    } else {
-      next('/Login')
-    }
-  }
-});
+// router.beforeEach( function(to,from,next) {
+//   if (to.name == 'Login') {
+//     document.title=to.matched[0].meta.title
+//     next()
+//   }else if(to.name == 'Register') {
+//     document.title=to.matched[0].meta.title
+//     next()
+//   } else {
+//     if (store.getters.isLogin === true) {
+//       document.title=to.matched[0].meta.title
+//       next()
+//     } else {
+//       next('/Login')
+//     }
+//   }
+// });
 

@@ -42,6 +42,14 @@
                         </router-link>
                     </a-menu-item>
                 </a-sub-menu>
+                <a-sub-menu key="9">
+                    <span slot="title"><a-icon type="line-chart" /><span @click="changeIndex(9)">终端控制</span></span>
+                    <a-menu-item key="10" @click.native="changeIndex(10)">
+                        <router-link to="/SwitchControl">
+                            <span>开关控制</span>
+                        </router-link>
+                    </a-menu-item>
+                </a-sub-menu>
             </a-menu>
         </a-layout-sider>
         <a-layout>
@@ -82,7 +90,7 @@
         name:"name",
         data() {
             return {
-                isShowData:"true",
+                isShowData:false,
                 file:{},
                 collapsed: false,
                 username:this.$store.state.user.msg,
@@ -100,7 +108,7 @@
             changeIndex(index){
                 console.log('index= %d',index)
                 console.log(this.isShowData)
-                if(index == 1 ){
+                if(index == 1 || index ==10 || index ==9 || index ==6 || index ==4 || index ==2){
                     this.isShowData=false
                     console.log(this.isShowData)
                 }
