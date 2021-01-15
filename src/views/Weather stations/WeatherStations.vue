@@ -56,17 +56,6 @@
                     this.drawLineChart();
                 })
             },
-            // file: function (val, oldVal) {
-            //     console.log('数据变化')
-            //     // 监听charData，当发生变化时，触发这个回调函数绘制图表
-            //     console.log('深度监听')
-            //     console.log(this.file)
-            //     console.log('new: %s, old: %s', val, oldVal);
-            //     this.splintData();
-            //     this.$nextTick(() => {
-            //         this.drawLineChart();
-            //     })
-            // },
             deep:true
         },
         methods: {
